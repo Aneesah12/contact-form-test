@@ -1,47 +1,37 @@
-import {useEffect, useState} from "react";
 import {v4} from 'uuid';
+import {useCocktails} from "./FetchCocktails";
+import styles from "./styles.css"
 
-//fetches data
-//filters data
-//maps through the data
-//renders the component
-//renders the cocktails
+//painting list of cocktails
+//getting data from 3rd party api - DONE
+//styling
+//filtering cocktails
+//mapping cocktails
+//extract rendering of each cocktail
 
 
-const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=mojito";
-
+//JS object for css (css in JSX)
 const CocktailMakeOld = () => {
-    const [cocktails, setCocktails] = useState([]);
 
-    useEffect(() => {
-        const loadCocktails = async () => {
-            const response2 = await fetch(url);
-            console.log("RESPONSE2: ", response2)
-            const data2 = await response2.json();
-            setCocktails(data2.drinks)
-            console.log("DATA2: ", data2)
-
-        }
-        loadCocktails()
-    }, [])
+    const { cocktails } = useCocktails();
 
     return (
-        <div style={{ color: 'blue'}}>
-            <h2>Your cocktails!!!</h2>
+        <divnse>
+            <h2 className={styles.cocktailStyling}>Your cocktails!!!</h2>
             <ul>
-                {cocktails.filter(cocktail => cocktail.strGlass.includes("glass"))
+                {cocktails
                     .map(cocktail =>
-                        <li key={v4()}>
+                        <ul key={v4()}>
                             <div>
                                 <p>{cocktail.strDrink}</p>
                                 <small>{cocktail.strCategory}</small>
-                                {/*<br/>*/}
+                                <br/>
                                 <small>{cocktail.strGlass}</small>
                             </div>
-                        </li>
+                        </ul>
                 )}
             </ul>
-        </div>
+        </divnse>
     )
 }
 
